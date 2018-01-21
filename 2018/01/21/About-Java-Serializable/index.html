@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Java," />
 
 
 
@@ -93,21 +93,22 @@
 
 
 
-<meta name="description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。 放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实">
+<meta name="description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实现">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【旧文重发】记使用Serializable接口踩过的坑">
 <meta property="og:url" content="http://yoursite.com/2018/01/21/About-Java-Serializable/index.html">
 <meta property="og:site_name" content="SeaLynn0&#39;s Page">
-<meta property="og:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。 放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实">
+<meta property="og:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实现">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/1.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/2.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/4.png">
-<meta property="og:updated_time" content="2018-01-21T15:20:51.884Z">
+<meta property="og:updated_time" content="2018-01-21T15:37:25.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【旧文重发】记使用Serializable接口踩过的坑">
-<meta name="twitter:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。 放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实">
+<meta name="twitter:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实现">
 <meta name="twitter:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/1.png">
 
 
@@ -325,9 +326,8 @@
       
 
       
-        <h2 id="写在开始之前"><a href="#写在开始之前" class="headerlink" title="写在开始之前"></a>写在开始之前</h2><pre><code>为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。
-放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。
-</code></pre><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="实现类的Serializable"><a href="#实现类的Serializable" class="headerlink" title="实现类的Serializable"></a>实现类的Serializable</h3><p>昨天在完成Java上机任务的遇到了要将一个存有对象的Arraylist对象存入文本文件。</p>
+        <h2 id="写在开始之前"><a href="#写在开始之前" class="headerlink" title="写在开始之前"></a>写在开始之前</h2><p>为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。<br>放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="实现类的Serializable"><a href="#实现类的Serializable" class="headerlink" title="实现类的Serializable"></a>实现类的Serializable</h3><p>昨天在完成Java上机任务的遇到了要将一个存有对象的Arraylist对象存入文本文件。</p>
 <p><img src="/2018/01/21/About-Java-Serializable/1.png" alt="image"></p>
 <p>百度了一下只要将类implement Serializable接口 就可以启用其序列化功能，并且父类实现了序列化子类就不再需要接入序列化接口。就像下面这样。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">abstract class Person implements Serializable  &#123;</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -388,6 +388,12 @@ Hint: Pass -Xlint:unchecked to javac to get more details.
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
       
 
       
@@ -486,6 +492,15 @@ Hint: Pass -Xlint:unchecked to javac to get more details.
 
           
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
           
 
         </nav>
