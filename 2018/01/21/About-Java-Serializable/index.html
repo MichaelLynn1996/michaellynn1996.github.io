@@ -93,22 +93,22 @@
 
 
 
-<meta name="description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实现">
+<meta name="description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。  正文实">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【旧文重发】记使用Serializable接口踩过的坑">
 <meta property="og:url" content="http://yoursite.com/2018/01/21/About-Java-Serializable/index.html">
-<meta property="og:site_name" content="SeaLynn0&#39;s Page">
-<meta property="og:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实现">
+<meta property="og:site_name" content="SeaLynn0&#39;s Blog">
+<meta property="og:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。  正文实">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/1.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/2.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/4.png">
-<meta property="og:updated_time" content="2018-01-21T15:37:25.982Z">
+<meta property="og:updated_time" content="2018-01-21T16:09:12.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【旧文重发】记使用Serializable接口踩过的坑">
-<meta name="twitter:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。 正文实现">
+<meta name="twitter:description" content="写在开始之前为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。  正文实">
 <meta name="twitter:image" content="http://yoursite.com/2018/01/21/About-Java-Serializable/1.png">
 
 
@@ -143,7 +143,7 @@
 
 
 
-  <title>【旧文重发】记使用Serializable接口踩过的坑 | SeaLynn0's Page</title>
+  <title>【旧文重发】记使用Serializable接口踩过的坑 | SeaLynn0's Blog</title>
   
 
 
@@ -179,12 +179,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">SeaLynn0's Page</span>
+        <span class="site-title">SeaLynn0's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">「人生苦短，及时寻乐」</p>
       
   </div>
 
@@ -281,7 +281,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SeaLynn0's Page">
+      <meta itemprop="name" content="SeaLynn0's Blog">
     </span>
 
     
@@ -337,6 +337,7 @@
 
       
         <h2 id="写在开始之前"><a href="#写在开始之前" class="headerlink" title="写在开始之前"></a>写在开始之前</h2><p>为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。<br>放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。</p>
+<hr>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="实现类的Serializable"><a href="#实现类的Serializable" class="headerlink" title="实现类的Serializable"></a>实现类的Serializable</h3><p>昨天在完成Java上机任务的遇到了要将一个存有对象的Arraylist对象存入文本文件。</p>
 <p><img src="/2018/01/21/About-Java-Serializable/1.png" alt="image"></p>
 <p>百度了一下只要将类implement Serializable接口 就可以启用其序列化功能，并且父类实现了序列化子类就不再需要接入序列化接口。就像下面这样。</p>
@@ -359,7 +360,6 @@ map.put(&quot;key&quot;, &quot;value&quot;);
 
 Hint: Pass -Xlint:unchecked to javac to get more details.
 </code></pre><p>但是运行的时候是没有问题的。</p>
-<hr>
 <h3 id="接下来是用的时候踩过的一些坑："><a href="#接下来是用的时候踩过的一些坑：" class="headerlink" title="接下来是用的时候踩过的一些坑："></a>接下来是用的时候踩过的一些坑：</h3><p>在第一次运行的时候出现了这样的报错：</p>
 <p><img src="/2018/01/21/About-Java-Serializable/3.png" alt="image"></p>
 <p>一开始没认真看报错而摸不着头脑后来发现报错的原因第一行就是：<br>    java.io.NotSerializableException: java.io.BufferedReader</p>
@@ -370,7 +370,6 @@ Hint: Pass -Xlint:unchecked to javac to get more details.
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">static void readFile(ArrayList&lt;Person&gt; list) throws IOException &#123;</div><div class="line">    Object temp = null;</div><div class="line">    File file = new File(&quot;person.dat&quot;);</div><div class="line">    FileInputStream in;</div><div class="line">    try &#123;</div><div class="line">        in = new FileInputStream(file);</div><div class="line">        ObjectInputStream objIn = new ObjectInputStream(in);</div><div class="line">        temp = objIn.readObject();</div><div class="line">        objIn.close();</div><div class="line">    &#125; catch (IOException | ClassNotFoundException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    list = (ArrayList&lt;Person&gt;) temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>会有和上面一样的Warning，但是，接下来list并不能得到原来存入文件的ArrayList对象，但是并没有报错。以致我并不能获取原本存在ArrayList中的对象。然后乖乖改成上面最后的那样写法，就没问题了。</p>
 <p><img src="/2018/01/21/About-Java-Serializable/4.png" alt="image"></p>
-<hr>
 <h3 id="讲在最后"><a href="#讲在最后" class="headerlink" title="讲在最后"></a>讲在最后</h3><p>学习计科已经一年了，感觉编程真的很有意思。只是可能还是Too young, too simple 才会犯这样那样的一些错踩这样那样的坑。但是编程还是要学下去，毕竟这是我热爱的东西。</p>
 
       
@@ -486,7 +485,7 @@ Hint: Pass -Xlint:unchecked to javac to get more details.
                alt="SeaLynn0" />
           <p class="site-author-name" itemprop="name">SeaLynn0</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">A computer science student's blog.</p>
           
         </div>
         <nav class="site-state motion-element">
