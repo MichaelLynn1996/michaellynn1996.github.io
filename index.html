@@ -334,49 +334,14 @@
 
       
         
-          
-            <a id="more"></a>
-<p>项目地址：<a href="https://github.com/xingkongus/stream-watch-android" target="_blank" rel="noopener">https://github.com/xingkongus/stream-watch-android</a></p>
-<h2 id="项目的开始"><a href="#项目的开始" class="headerlink" title="项目的开始"></a>项目的开始</h2><p><a href="http://live.xingkong.us" target="_blank" rel="noopener">星空直播</a>平台的后端整个算是<a href="https://github.com/Hansin1997" target="_blank" rel="noopener">翰新</a>搭建起来的。他给我后端的API接口，我试着把他封装成SDK，并且做一个安卓端的Demo出来。于是项目就开始了……</p>
-<h2 id="一些知识的总结"><a href="#一些知识的总结" class="headerlink" title="一些知识的总结"></a>一些知识的总结</h2><h3 id="Fragment全局获取上下文联系Context"><a href="#Fragment全局获取上下文联系Context" class="headerlink" title="Fragment全局获取上下文联系Context"></a>Fragment全局获取上下文联系Context</h3><p>在封装SDK的过程中，我用SharedPreferences来存储从服务器获取的Cookie，里面保存和获取保存的Cookie的方法为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static void saveCookiePreference(Context context, String value) &#123;</div><div class="line">    SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);</div><div class="line">    SharedPreferences.Editor editor = preference.edit();</div><div class="line">    editor.putString(COOKIE, value);</div><div class="line">    editor.apply();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static String getCookiePreference(Context context) &#123;</div><div class="line">    SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);</div><div class="line">    return preference.getString(COOKIE, &quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>很明显我需要用到Context，所以我在实例化操作API的对象时需要传入一个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public Client(Context context) &#123;</div><div class="line">    this.context = context;</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>但是我在Fragment里面需要实例化Cilent类时，不管是利用Fragment类的getActivity()还是getContext()方法，SharedPreferences的操作总是会报错，大致的意思就是没有办法获取Context。而AS也会有getActivity()或getContext()返回值可能为空的警告。我不知道为什么，但是就干脆自己写一个获取全局变量的方法。</p>
-<p>首先写一个自定义的Application类MyApplication，写法如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class MyApplication extends Application &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 一个MyApplication的静态对象</div><div class="line">     * 用于Fragment获取上下文练习Context</div><div class="line">     */</div><div class="line">    private static MyApplication mInstance;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line">        mInstance = this;   //在MyApplication 启动时获取本对象</div><div class="line"></div><div class="line">        ......</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 获取context</div><div class="line">     *</div><div class="line">     * @return mInstance</div><div class="line">     */</div><div class="line">    public static Context getInstance() &#123;</div><div class="line">        return mInstance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>以此便可以获取当前的Application实例，然后写BaseFragment：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public class BaseFragment extends Fragment &#123;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 一个Activity对象作为Context</div><div class="line">     */</div><div class="line">    private Activity activity;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 子Fragment获取Context的方法</div><div class="line">     * @return activity</div><div class="line">     */</div><div class="line">    public Context getInstantContext() &#123;</div><div class="line">        if (activity == null) &#123;</div><div class="line">            return MyApplication.getInstance();</div><div class="line">        &#125;</div><div class="line">        return activity;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 用Fragment的onAttach(Context context);方法来绑定Context</div><div class="line">     * @param context</div><div class="line">     */</div><div class="line">    @Override</div><div class="line">    public void onAttach(Context context) &#123;</div><div class="line">        super.onAttach(context);</div><div class="line">        activity = getActivity();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>随后的Fragment继承BaseFragment，实例化Client时调用getInstantContext()方法即可。</p>
-<h3 id="ActivityLifecycleCallbacks接口的使用"><a href="#ActivityLifecycleCallbacks接口的使用" class="headerlink" title="ActivityLifecycleCallbacks接口的使用"></a>ActivityLifecycleCallbacks接口的使用</h3><p>现在很多安卓开发的过程中都会用到Toolbar这一个强大的控件，但是一般的App都不止由一个Activity组成，如果在写每个Activity时都要实例化一个Toolbar显然不高效。</p>
-<p>我原本的实现方式是封装一个BaseActivity，在里面实现Toobar然后将子Activity的布局用LayoutInflater投射到BaseActivity布局的容器里。</p>
-<p>然而，我在开发的过程中引入了ButterKnife，一个很好用的依赖注入框架。但是问题也出现了：继承BaseActivity的子Activity中的布局，可能是由LayoutInflater投射到容器的原因，ButterKnife无法获取布局中的控件值。</p>
-<p>在试了很多方法都无法解决之后，我突然想起在有道云笔记收藏的一篇文章：<a href="https://www.jianshu.com/p/75a5c24174b2" target="_blank" rel="noopener">我一行代码都不写实现Toolbar!你却还在封装BaseActivity?</a>;文章不提倡封装BaseActivity，因为会有管理困难的问题。在我此次开发也会有这样的问题：并非所有的Activity都需要Toobar，但是其可能需要一些其他的对象或着操作。</p>
-<p>而文章的解决办法用到了Application类内部的一个接口ActivityLifecycleCallbacks和方法registerActivityLifecycleCallbacks()来解决。作用就是就是在你调用这个方法传入这个接口实现类后,<strong>系统会在每个 Activity 执行完对应的生命周期后都调用这个实现类中对应的方法，注意是每个</strong></p>
-<h4 id="具体的用法"><a href="#具体的用法" class="headerlink" title="具体的用法"></a>具体的用法</h4><p>先按照自己的需求单独写一个toolbar.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;android.support.v7.widget.Toolbar xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:app=&quot;http://schemas.android.com/apk/us.xingkong.testing&quot;</div><div class="line">    android:id=&quot;@+id/toolbar&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;?attr/actionBarSize&quot;</div><div class="line">    app:layout_scrollFlags=&quot;scroll||enterAlways&quot;</div><div class="line">    app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;&gt;</div><div class="line"></div><div class="line">&lt;/android.support.v7.widget.Toolbar&gt;</div></pre></td></tr></table></figure>
-<p>在需要的地方include：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;include layout=&quot;@layout/toolbar&quot; /&gt;</div></pre></td></tr></table></figure>
-<p>那么回到自定义的MyApplication：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class MyApplication extends Application &#123;</div><div class="line"></div><div class="line">   ......</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate() &#123;</div><div class="line">        super.onCreate();</div><div class="line">        ......</div><div class="line"></div><div class="line">        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() &#123;</div><div class="line">            @Override</div><div class="line">            public void onActivityCreated(Activity activity, Bundle savedInstanceState) &#123;</div><div class="line">                if (activity.findViewById(R.id.toolbar)!=null)&#123;</div><div class="line">                    ((BaseActivity)activity).setSupportActionBar((Toolbar)activity.findViewById(R.id.toolbar));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            ......</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在Activity中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    ......</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(final Bundle savedInstanceState) &#123;</div><div class="line">        setContentView(getLayout());</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        ......</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>注意：由于 ActivityLifecycleCallbacks 中所有方法的调用时机都是在 Activity 对应生命周期的 Super 方法中进行的,所以在 Activity 的 onCreate 方法中使用 setContentView 必须在 super.onCreate(savedInstanceState); 之前,不然在 onActivityCreated 方法中 findViewById 会发现找不到。（文章原话，这个坑我就踩了）</strong></p>
-</blockquote>
-<p>由此便可以不用BaseActivity来实现Toolbar。</p>
-<h2 id="关于项目的一些思考"><a href="#关于项目的一些思考" class="headerlink" title="关于项目的一些思考"></a>关于项目的一些思考</h2><ul>
-<li><p>总的来说我对此项目有点不满意的是由于才疏浅薄，我想不到一个更好的封装SDK封装方式，以至于需要在每个Activity创建的时候都实例一个Client对象。显然这还是比较低级的。暂时的想法可能会试着将其封装为用 Client.方法名 的静态方法的方式来调用。</p>
-</li>
-<li><p>没有使用结构，比如MVP、MVVM等。接下来还是重点学习一下MVP…</p>
-</li>
-<li><p>Java(HttpUrlConnection)是否已经有将Cookie存于本地的方法，这个有待于我去好好研究，毕竟如果本身已经有更高效的方法，就没有必要再用SharedPreferences。</p>
-</li>
-<li><p>依然不能明白Fragment中的getActivity()或getContext()返回值为何为空…</p>
-</li>
-</ul>
-<p><strong><em>当然开发的过程中遇到了很多坑，等想到了再继续补充吧</em></strong></p>
-
-          
+          <p>##</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/04/StarStreamConclusion/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -601,41 +566,18 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="什么是kotlin-koans"><a href="#什么是kotlin-koans" class="headerlink" title="什么是kotlin-koans"></a>什么是kotlin-koans</h2><p>今天开始学习学习Kotlin，学习的方式是看书——《Kotlin实战（Kotlin in Action）》然后在<a href="https://github.com/Kotlin/kotlin-koans" target="_blank" rel="noopener">kotlin-koans</a>进行练习。至于什么是kotlin-koans，这是其Github上的描述：</p>
+          <h2 id="什么是kotlin-koans"><a href="#什么是kotlin-koans" class="headerlink" title="什么是kotlin-koans"></a>什么是kotlin-koans</h2><p>今天开始学习学习Kotlin，学习的方式是看书——《Kotlin实战（Kotlin in Action）》然后在<a href="https://github.com/Kotlin/kotlin-koans" target="_blank" rel="noopener">kotlin-koans</a>进行练习。至于什么是kotlin-koans，这是其Github上的描述：</p>
 <blockquote>
 <p>Kotlin Koans Workshop is a series of exercises to get you familiar with the Kotlin Syntax. Each exercise is created as a failing unit test and your job is to make it pass.</p>
 </blockquote>
 <p>大概的意思就是说这是Kotlin官方推出的一系列Kotlin语法练习。一共42个任务，分为6个模块。每一个任务都有一系列单元测试，需要完成的任务就是编码通过单元测试。接下来会把完成完成「kotlin-koans」练习过程中将相关语法点做一个简单的记录。大概每个模块总结成一片文章吧。</p>
-<h3 id="To-do-List"><a href="#To-do-List" class="headerlink" title="To-do List"></a>To-do List</h3><ul>
-<li>[ ] i_introduction</li>
-<li>[ ] ii_collections</li>
-<li>[ ] iii_conventions</li>
-<li>[ ] iv_properties</li>
-<li>[ ] v_builders</li>
-<li>[ ] vi_generics</li>
-</ul>
-<h2 id="怎么用kotlin-koans"><a href="#怎么用kotlin-koans" class="headerlink" title="怎么用kotlin-koans"></a>怎么用kotlin-koans</h2><p>我首先把<a href="https://github.com/Kotlin/kotlin-koans" target="_blank" rel="noopener">kotlin-koans</a>在Github的项目上给fork到我的仓库然后再将其在Idea上git下来。也可以直接把原本的仓库的给git下来。</p>
-<p><img src="/2018/01/22/Kotlin-learning-diary0/1.png" alt=""></p>
-<p>git下来后用Idea打开，项目的目录长这样：</p>
-<p><img src="/2018/01/22/Kotlin-learning-diary0/2.png" alt=""></p>
-<h3 id="0-Hello-World"><a href="#0-Hello-World" class="headerlink" title="_0_Hello_World"></a>_0_Hello_World</h3><p><img src="/2018/01/22/Kotlin-learning-diary0/3.png" alt=""></p>
-<p>和所有其他语言一样，「kotlin-koans」的第一个任务名称就是Hello World，这个任务比较简单，提示也说的很清楚，就是要求task0函数返回一个字符串OK：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fun task0(): String &#123;</div><div class="line">    return &quot;OK&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这一个任务主要涉及kotlin的函数定义。在kotlin中函数通过关键字fun声明，和Java中函数的返回类型写在函数名称前不一样，Kotlin中函数的返回类型在函数名称的后面，中间以:分开。Kotlin中的函数总是返回一个值，如果不指定返回值的类型，默认返回Uint（类似Java中的Void）。如果函数体就是一个简单的语句，可以去掉大括弧，用等号表示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fun task0(): String = &quot;OK&quot;</div><div class="line">//或</div><div class="line">//  fun task0() = &quot;OK&quot;  //Resulutions</div></pre></td></tr></table></figure>
-<p>同时第一个任务也有提示在README.md上有教你怎么run,其实==虽然我也是百度了才懂的：</p>
-<p><img src="/2018/01/22/Kotlin-learning-diary0/4.png" alt=""></p>
-<p><img src="/2018/01/22/Kotlin-learning-diary0/5.png" alt=""></p>
-<p><img src="/2018/01/22/Kotlin-learning-diary0/6.png" alt=""></p>
-<p>答案在Github库里的另一个branch</p>
-<p>就这样第一个任务Hello World就做完了~</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>如果不想在编译器上练习的话也可以在在线练习:<a href="https://try.kotlinlang.org/" target="_blank" rel="noopener">TRY ONLINE</a>。</p>
-<p>这篇文章也参考了很多一篇简书的内容：<a href="https://www.jianshu.com/p/5ff8d26bc391?from=jiantop.com" target="_blank" rel="noopener">Kotlin Koans学习笔记(1)</a>。</p>
-<p>下一篇开始更新第一模块i_introduction的13个任务。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/22/Kotlin-learning-diary0/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
