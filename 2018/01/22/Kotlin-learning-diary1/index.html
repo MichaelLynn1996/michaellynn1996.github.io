@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="这是「Kotlin学习笔记」的第1篇，第0篇在这里。 _0_Hello_World具体请看上一篇文章的内容。 _1_Java_To_Kotlin_Converter这个任务的要求就是将一段Java代码转换成Kotlin代码，提示可以直接将Java代码复制粘贴，然后使用Intellij提供的Convert Java File to Kotlin File功能（仅仅是这个任务允许这样做），非常便捷。">
+<meta name="description" content="这是「Kotlin学习笔记」的第1篇，第0篇在这里。">
 <meta name="keywords" content="Kotlin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kotlin学习笔记part1-i_introduction">
 <meta property="og:url" content="http://yoursite.com/2018/01/22/Kotlin-learning-diary1/index.html">
 <meta property="og:site_name" content="SeaLynn0&#39;s Blog">
-<meta property="og:description" content="这是「Kotlin学习笔记」的第1篇，第0篇在这里。 _0_Hello_World具体请看上一篇文章的内容。 _1_Java_To_Kotlin_Converter这个任务的要求就是将一段Java代码转换成Kotlin代码，提示可以直接将Java代码复制粘贴，然后使用Intellij提供的Convert Java File to Kotlin File功能（仅仅是这个任务允许这样做），非常便捷。">
+<meta property="og:description" content="这是「Kotlin学习笔记」的第1篇，第0篇在这里。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-22T06:06:51.535Z">
+<meta property="og:updated_time" content="2018-02-04T17:29:48.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kotlin学习笔记part1-i_introduction">
-<meta name="twitter:description" content="这是「Kotlin学习笔记」的第1篇，第0篇在这里。 _0_Hello_World具体请看上一篇文章的内容。 _1_Java_To_Kotlin_Converter这个任务的要求就是将一段Java代码转换成Kotlin代码，提示可以直接将Java代码复制粘贴，然后使用Intellij提供的Convert Java File to Kotlin File功能（仅仅是这个任务允许这样做），非常便捷。">
+<meta name="twitter:description" content="这是「Kotlin学习笔记」的第1篇，第0篇在这里。">
 
 
 
@@ -332,6 +332,7 @@
 
       
         <p>这是「Kotlin学习笔记」的第1篇，<a href="http://blog.sealynn0.cn/2018/01/22/Kotlin-learning-diary0/" target="_blank" rel="noopener">第0篇在这里</a>。</p>
+<a id="more"></a>
 <h3 id="0-Hello-World"><a href="#0-Hello-World" class="headerlink" title="_0_Hello_World"></a>_0_Hello_World</h3><p>具体请看上一篇文章的内容。</p>
 <h3 id="1-Java-To-Kotlin-Converter"><a href="#1-Java-To-Kotlin-Converter" class="headerlink" title="_1_Java_To_Kotlin_Converter"></a>_1_Java_To_Kotlin_Converter</h3><p>这个任务的要求就是将一段Java代码转换成Kotlin代码，提示可以直接将Java代码复制粘贴，然后使用Intellij提供的Convert Java File to Kotlin File功能（仅仅是这个任务允许这样做），非常便捷。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//Java</div><div class="line">public class JavaCode1 extends JavaCode &#123;</div><div class="line">    public String task1(Collection&lt;Integer&gt; collection) &#123;</div><div class="line">        StringBuilder sb = new StringBuilder();</div><div class="line">        sb.append(&quot;&#123;&quot;);</div><div class="line">        Iterator&lt;Integer&gt; iterator = collection.iterator();</div><div class="line">        while (iterator.hasNext()) &#123;</div><div class="line">            Integer element = iterator.next();</div><div class="line">            sb.append(element);</div><div class="line">            if (iterator.hasNext()) &#123;</div><div class="line">                sb.append(&quot;, &quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        sb.append(&quot;&#125;&quot;);</div><div class="line">        return sb.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//Kotlin</div><div class="line">    fun task1(collection: Collection&lt;Int&gt;): String &#123;</div><div class="line">        val sb = StringBuilder()</div><div class="line">        sb.append(&quot;&#123;&quot;)</div><div class="line">        val iterator = collection.iterator()</div><div class="line">        while (iterator.hasNext()) &#123;</div><div class="line">            val element = iterator.next()</div><div class="line">            sb.append(element)</div><div class="line">            if (iterator.hasNext()) &#123;</div><div class="line">                sb.append(&quot;, &quot;)</div><div class="line">            &#125;</div><div class="line">    &#125;</div><div class="line">    sb.append(&quot;&#125;&quot;)</div><div class="line">    return sb.toString()</div><div class="line">&#125;</div></pre></td></tr></table></figure>

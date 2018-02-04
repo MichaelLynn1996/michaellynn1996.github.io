@@ -335,7 +335,8 @@
       
         
           
-            <p>项目地址：<a href="https://github.com/xingkongus/stream-watch-android" target="_blank" rel="noopener">https://github.com/xingkongus/stream-watch-android</a></p>
+            <a id="more"></a>
+<p>项目地址：<a href="https://github.com/xingkongus/stream-watch-android" target="_blank" rel="noopener">https://github.com/xingkongus/stream-watch-android</a></p>
 <h2 id="项目的开始"><a href="#项目的开始" class="headerlink" title="项目的开始"></a>项目的开始</h2><p><a href="http://live.xingkong.us" target="_blank" rel="noopener">星空直播</a>平台的后端整个算是<a href="https://github.com/Hansin1997" target="_blank" rel="noopener">翰新</a>搭建起来的。他给我后端的API接口，我试着把他封装成SDK，并且做一个安卓端的Demo出来。于是项目就开始了……</p>
 <h2 id="一些知识的总结"><a href="#一些知识的总结" class="headerlink" title="一些知识的总结"></a>一些知识的总结</h2><h3 id="Fragment全局获取上下文联系Context"><a href="#Fragment全局获取上下文联系Context" class="headerlink" title="Fragment全局获取上下文联系Context"></a>Fragment全局获取上下文联系Context</h3><p>在封装SDK的过程中，我用SharedPreferences来存储从服务器获取的Cookie，里面保存和获取保存的Cookie的方法为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static void saveCookiePreference(Context context, String value) &#123;</div><div class="line">    SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);</div><div class="line">    SharedPreferences.Editor editor = preference.edit();</div><div class="line">    editor.putString(COOKIE, value);</div><div class="line">    editor.apply();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static String getCookiePreference(Context context) &#123;</div><div class="line">    SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);</div><div class="line">    return preference.getString(COOKIE, &quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -484,14 +485,14 @@
 
       
         
-          
-            <p>这是「Kotlin学习笔记」的第1篇，<a href="http://blog.sealynn0.cn/2018/01/22/Kotlin-learning-diary0/" target="_blank" rel="noopener">第0篇在这里</a>。</p>
-<h3 id="0-Hello-World"><a href="#0-Hello-World" class="headerlink" title="_0_Hello_World"></a>_0_Hello_World</h3><p>具体请看上一篇文章的内容。</p>
-<h3 id="1-Java-To-Kotlin-Converter"><a href="#1-Java-To-Kotlin-Converter" class="headerlink" title="_1_Java_To_Kotlin_Converter"></a>_1_Java_To_Kotlin_Converter</h3><p>这个任务的要求就是将一段Java代码转换成Kotlin代码，提示可以直接将Java代码复制粘贴，然后使用Intellij提供的Convert Java File to Kotlin File功能（仅仅是这个任务允许这样做），非常便捷。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//Java</div><div class="line">public class JavaCode1 extends JavaCode &#123;</div><div class="line">    public String task1(Collection&lt;Integer&gt; collection) &#123;</div><div class="line">        StringBuilder sb = new StringBuilder();</div><div class="line">        sb.append(&quot;&#123;&quot;);</div><div class="line">        Iterator&lt;Integer&gt; iterator = collection.iterator();</div><div class="line">        while (iterator.hasNext()) &#123;</div><div class="line">            Integer element = iterator.next();</div><div class="line">            sb.append(element);</div><div class="line">            if (iterator.hasNext()) &#123;</div><div class="line">                sb.append(&quot;, &quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        sb.append(&quot;&#125;&quot;);</div><div class="line">        return sb.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">//Kotlin</div><div class="line">    fun task1(collection: Collection&lt;Int&gt;): String &#123;</div><div class="line">        val sb = StringBuilder()</div><div class="line">        sb.append(&quot;&#123;&quot;)</div><div class="line">        val iterator = collection.iterator()</div><div class="line">        while (iterator.hasNext()) &#123;</div><div class="line">            val element = iterator.next()</div><div class="line">            sb.append(element)</div><div class="line">            if (iterator.hasNext()) &#123;</div><div class="line">                sb.append(&quot;, &quot;)</div><div class="line">            &#125;</div><div class="line">    &#125;</div><div class="line">    sb.append(&quot;&#125;&quot;)</div><div class="line">    return sb.toString()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这一段代码两者之间没有明显的差别，但是在下一个任务中可以看到Kotlin中这一段代码可以精简成一行代码。</p>
-
-          
+          <p>这是「Kotlin学习笔记」的第1篇，<a href="http://blog.sealynn0.cn/2018/01/22/Kotlin-learning-diary0/" target="_blank" rel="noopener">第0篇在这里</a>。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/22/Kotlin-learning-diary1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -601,7 +602,8 @@
       
         
           
-            <h2 id="什么是kotlin-koans"><a href="#什么是kotlin-koans" class="headerlink" title="什么是kotlin-koans"></a>什么是kotlin-koans</h2><p>今天开始学习学习Kotlin，学习的方式是看书——《Kotlin实战（Kotlin in Action）》然后在<a href="https://github.com/Kotlin/kotlin-koans" target="_blank" rel="noopener">kotlin-koans</a>进行练习。至于什么是kotlin-koans，这是其Github上的描述：</p>
+            <a id="more"></a>
+<h2 id="什么是kotlin-koans"><a href="#什么是kotlin-koans" class="headerlink" title="什么是kotlin-koans"></a>什么是kotlin-koans</h2><p>今天开始学习学习Kotlin，学习的方式是看书——《Kotlin实战（Kotlin in Action）》然后在<a href="https://github.com/Kotlin/kotlin-koans" target="_blank" rel="noopener">kotlin-koans</a>进行练习。至于什么是kotlin-koans，这是其Github上的描述：</p>
 <blockquote>
 <p>Kotlin Koans Workshop is a series of exercises to get you familiar with the Kotlin Syntax. Each exercise is created as a failing unit test and your job is to make it pass.</p>
 </blockquote>
@@ -742,44 +744,14 @@
 
       
         
-          
-            <h2 id="写在开始之前"><a href="#写在开始之前" class="headerlink" title="写在开始之前"></a>写在开始之前</h2><p>为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。<br>放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。</p>
-<hr>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="实现类的Serializable"><a href="#实现类的Serializable" class="headerlink" title="实现类的Serializable"></a>实现类的Serializable</h3><p>昨天在完成Java上机任务的遇到了要将一个存有对象的Arraylist对象存入文本文件。</p>
-<p><img src="/2018/01/21/About-Java-Serializable/1.png" alt="image"></p>
-<p>百度了一下只要将类implement Serializable接口 就可以启用其序列化功能，并且父类实现了序列化子类就不再需要接入序列化接口。就像下面这样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">abstract class Person implements Serializable  &#123;</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>而ArrayList类本身就已经实现了Serializable</p>
-<p><img src="/2018/01/21/About-Java-Serializable/2.png" alt="image"></p>
-<p>然后理论上用writeObject()方法和readObject()方法即可将Arraylist对象存入文件。于是我在抽象类Tools中封装了两个静态方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">abstract class Tools &#123;</div><div class="line">    static void writeFile(Object obj) throws IOException &#123;</div><div class="line">        File file = new File(&quot;person.dat&quot;);</div><div class="line">        FileOutputStream out;</div><div class="line">        try &#123;</div><div class="line">            out = new FileOutputStream(file);</div><div class="line">            ObjectOutputStream objOut = new ObjectOutputStream(out);</div><div class="line">            objOut.writeObject(obj);</div><div class="line">            objOut.close();</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    static Object readFile() throws IOException &#123;</div><div class="line">        Object temp = null;</div><div class="line">        File file = new File(&quot;person.dat&quot;);</div><div class="line">        FileInputStream in;</div><div class="line">        try &#123;</div><div class="line">            in = new FileInputStream(file);</div><div class="line">            ObjectInputStream objIn = new ObjectInputStream(in);</div><div class="line">            temp = objIn.readObject();</div><div class="line">            objIn.close();</div><div class="line">        &#125; catch (IOException | ClassNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        return temp;</div><div class="line">    &#125;</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>定义并实例Arraylist对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;Person&gt; list = new ArrayList&lt;&gt;();</div></pre></td></tr></table></figure>
-<p>调用方法，将Arraylist传入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Tools.writeFile(list);</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list = (ArrayList&lt;Person&gt;) Tools.readFile();</div></pre></td></tr></table></figure>
-<p>其实不知道为什么在读文件的方法Intellij IDEA会提示下面Warning：</p>
-<pre><code>Unchecked cast: &apos;java.lang.Object&apos; to &apos;java.util.ArrayList&lt;Person&gt;&apos; less... (Ctrl+F1) 
-Signals places where an unchecked warning is issued by the compiler, for example:
-
-void f(HashMap map) {
-map.put(&quot;key&quot;, &quot;value&quot;);
-}
-
-Hint: Pass -Xlint:unchecked to javac to get more details.
-</code></pre><p>但是运行的时候是没有问题的。</p>
-<h3 id="接下来是用的时候踩过的一些坑："><a href="#接下来是用的时候踩过的一些坑：" class="headerlink" title="接下来是用的时候踩过的一些坑："></a>接下来是用的时候踩过的一些坑：</h3><p>在第一次运行的时候出现了这样的报错：</p>
-<p><img src="/2018/01/21/About-Java-Serializable/3.png" alt="image"></p>
-<p>一开始没认真看报错而摸不着头脑后来发现报错的原因第一行就是：<br>    java.io.NotSerializableException: java.io.BufferedReader</p>
-<p>原来我在Person类中实例了InputStreamReader和BufferedReader对象给本类和子类调用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InputStreamReader ir = new InputStreamReader(System.in);</div><div class="line">BufferedReader in = new BufferedReader(ir);</div></pre></td></tr></table></figure>
-<p>虽然感觉这样子用本身上会有问题但是写个上机作业应该还是没啥问题的，结果这两个对象不能序列化。解决办法也很简单，就是将这两个对象删掉然后在每个要用到的方法中再新建。然后就写文件没有问题了。</p>
-<p>还有就是在读文件时，一开始我的方法是这样子写的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">static void readFile(ArrayList&lt;Person&gt; list) throws IOException &#123;</div><div class="line">    Object temp = null;</div><div class="line">    File file = new File(&quot;person.dat&quot;);</div><div class="line">    FileInputStream in;</div><div class="line">    try &#123;</div><div class="line">        in = new FileInputStream(file);</div><div class="line">        ObjectInputStream objIn = new ObjectInputStream(in);</div><div class="line">        temp = objIn.readObject();</div><div class="line">        objIn.close();</div><div class="line">    &#125; catch (IOException | ClassNotFoundException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">    list = (ArrayList&lt;Person&gt;) temp;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>会有和上面一样的Warning，但是，接下来list并不能得到原来存入文件的ArrayList对象，但是并没有报错。以致我并不能获取原本存在ArrayList中的对象。然后乖乖改成上面最后的那样写法，就没问题了。</p>
-<p><img src="/2018/01/21/About-Java-Serializable/4.png" alt="image"></p>
-<h3 id="讲在最后"><a href="#讲在最后" class="headerlink" title="讲在最后"></a>讲在最后</h3><p>学习计科已经一年了，感觉编程真的很有意思。只是可能还是Too young, too simple 才会犯这样那样的一些错踩这样那样的坑。但是编程还是要学下去，毕竟这是我热爱的东西。</p>
-
-          
+          <h2 id="写在开始之前"><a href="#写在开始之前" class="headerlink" title="写在开始之前"></a>写在开始之前</h2><p>为什么说是【旧文重发】，因为这是我在大一下学期的写的一篇文章。最近突然想开始写博客，觉得要维护一个Wordpress很麻烦，用Markdown写然后deploy在Github上似乎比较简单方便，所以以后的博文就放在Github上吧。<br>放假想开始学Kotlin，接下来可能会发一些与Kotlin学习相关的博文。至于学习和写博文能不能坚持下去，就以这篇博文为据，看到时候会不会打脸吧。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/21/About-Java-Serializable/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
