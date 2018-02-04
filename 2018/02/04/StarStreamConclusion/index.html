@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="##">
+<meta name="description" content="项目地址：https://github.com/xingkongus/stream-watch-android 项目的开始星空直播平台的后端整个算是翰新搭建起来的。他给我后端的API接口，我试着把他封装成SDK，并且做一个安卓端的Demo出来。于是项目就开始了……">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="星空直播平台安卓端开发的一些总结">
 <meta property="og:url" content="http://yoursite.com/2018/02/04/StarStreamConclusion/index.html">
 <meta property="og:site_name" content="SeaLynn0&#39;s Blog">
-<meta property="og:description" content="##">
+<meta property="og:description" content="项目地址：https://github.com/xingkongus/stream-watch-android 项目的开始星空直播平台的后端整个算是翰新搭建起来的。他给我后端的API接口，我试着把他封装成SDK，并且做一个安卓端的Demo出来。于是项目就开始了……">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-04T17:36:10.042Z">
+<meta property="og:updated_time" content="2018-02-04T17:38:56.448Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="星空直播平台安卓端开发的一些总结">
-<meta name="twitter:description" content="##">
+<meta name="twitter:description" content="项目地址：https://github.com/xingkongus/stream-watch-android 项目的开始星空直播平台的后端整个算是翰新搭建起来的。他给我后端的API接口，我试着把他封装成SDK，并且做一个安卓端的Demo出来。于是项目就开始了……">
 
 
 
@@ -331,10 +331,9 @@
       
 
       
-        <p>##</p>
-<a id="more"></a>
-<p>项目地址：<a href="https://github.com/xingkongus/stream-watch-android" target="_blank" rel="noopener">https://github.com/xingkongus/stream-watch-android</a></p>
+        <p>项目地址：<a href="https://github.com/xingkongus/stream-watch-android" target="_blank" rel="noopener">https://github.com/xingkongus/stream-watch-android</a></p>
 <h2 id="项目的开始"><a href="#项目的开始" class="headerlink" title="项目的开始"></a>项目的开始</h2><p><a href="http://live.xingkong.us" target="_blank" rel="noopener">星空直播</a>平台的后端整个算是<a href="https://github.com/Hansin1997" target="_blank" rel="noopener">翰新</a>搭建起来的。他给我后端的API接口，我试着把他封装成SDK，并且做一个安卓端的Demo出来。于是项目就开始了……</p>
+<a id="more"></a>
 <h2 id="一些知识的总结"><a href="#一些知识的总结" class="headerlink" title="一些知识的总结"></a>一些知识的总结</h2><h3 id="Fragment全局获取上下文联系Context"><a href="#Fragment全局获取上下文联系Context" class="headerlink" title="Fragment全局获取上下文联系Context"></a>Fragment全局获取上下文联系Context</h3><p>在封装SDK的过程中，我用SharedPreferences来存储从服务器获取的Cookie，里面保存和获取保存的Cookie的方法为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static void saveCookiePreference(Context context, String value) &#123;</div><div class="line">    SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);</div><div class="line">    SharedPreferences.Editor editor = preference.edit();</div><div class="line">    editor.putString(COOKIE, value);</div><div class="line">    editor.apply();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static String getCookiePreference(Context context) &#123;</div><div class="line">    SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);</div><div class="line">    return preference.getString(COOKIE, &quot;&quot;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>很明显我需要用到Context，所以我在实例化操作API的对象时需要传入一个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public Client(Context context) &#123;</div><div class="line">    this.context = context;</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
