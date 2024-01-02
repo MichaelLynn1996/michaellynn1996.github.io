@@ -1,0 +1,214 @@
+# Project information
+site_name: Michael Lynn
+site_url: https://mlynn.cn/
+site_author: Michael Lynn
+site_description: Michael Lynn's personal site.
+
+# Repository
+repo_name: MichaelLynn1996/michaellynn1996.github.io
+repo_url: https://github.com/MichaelLynn1996/michaellynn1996.github.io
+
+# Copyright
+copyright: "<a href='https://github.com/MichaelLynn1996/michaellynn1996.github.io'>&copy;  <script>document.write(new Date().getFullYear())</script> Michael Lynn</a>" # 左下角的版权声明
+
+# Configuration
+theme:
+  name: material
+  favicon: images/favicon.jpg
+  custom_dir: material/overrides
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+    - navigation.footer
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  font:
+    text: Roboto
+    code: Roboto Mono
+  language: zh  # 一些提示性的文字会变成中文
+  icon:
+    logo: logo
+
+
+
+# Plugins
+plugins:
+  # - i18n:
+  #     # reconfigure_material: true
+  #     # reconfigure_search: true
+  #     # fallback_to_default: true
+  #     docs_structure: suffix
+  #     languages:
+  #       - locale: zh
+  #         default: true
+  #         name: 简体中文
+  #         build: true
+  #       - locale: en
+  #         name: English
+  #         build: true
+  #         nav_translations:
+  #             主页: Home
+  #             博客: Blog
+  #             学术: Academic
+  #             关于: About
+
+  - blog
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+      lang:
+        - en
+        # 日语搜索汉字
+        - ja
+        - zh
+  - minify:
+      minify_html: true
+
+# Hooks
+hooks:
+  - material/overrides/hooks/shortcodes.py
+  - material/overrides/hooks/translations.py
+
+# Additional configuration
+extra:
+  status:
+    new: Recently added
+    deprecated: Deprecated
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/MichealLynn1996
+    # - icon: fontawesome/brands/docker
+    #   link: https://hub.docker.com/r/squidfunk/mkdocs-material/
+    # - icon: fontawesome/brands/python
+    #   link: https://pypi.org/project/mkdocs-material/
+    # - icon: fontawesome/brands/mastodon
+    #   link: https://fosstodon.org/@squidfunk
+    # - icon: fontawesome/brands/twitter
+    #   link: https://twitter.com/squidfunk
+  alternate:
+    - name: 简体中文
+      link: /
+      lang: zh
+    - name: English
+      link: /en/ 
+      lang: en
+    
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Page tree
+nav:
+  - 主页: index.md
+  - 博客:
+    - blog/index.md
+    # - blog/archive/2021.md
+    # - blog/archive/2018.md
+    # - blog/archive/2017.md
+    # - 2017:
+    #   - blog/posts/2017/hello-world.md
+    # - 2018:
+    #   - blog/posts/2018/About-Java-Serializable.md
+    #   - blog/posts/2018/install-nginx-in-ubuntu.md
+    #   - blog/posts/2018/StarStreamConclusion.md
+    # - 2021:
+    #   - blog/posts/2021/a-practice-of-home-mesh-network-structure.md
+    #   - blog/posts/2021/Dawn-Blossoms-Plucked-at-Dusk.md
+    #   - blog/posts/2021/solution-of-gsonformat.md
+  - 学术: academic.md
+  - 关于: 
+    - about/about.md
+    - about/alive.md
+  # - For fun: 
+  #   - forfun/index.md
+  #   - forfun/alive.md

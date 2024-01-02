@@ -1,0 +1,54 @@
+{% extends "main.html" %}
+
+{% block content %}
+    <style>
+        .bg {
+            padding: 16px;
+            background-color: #322e2f;
+        }
+
+        .div_name {
+            font-size: 60px;
+            text-align: center;
+            margin-top: 16px;
+            color: aliceblue;
+            font-family: Serif, sans-serif;
+        }
+
+        .div_year {
+            font-size: 60px;
+            text-align: center;
+            margin-top: 16px;
+            color: red;
+            font-family: Serif, sans-serif;
+        }
+
+        .div_word {
+            font-size: 40px;
+            text-align: center;
+            margin-top: 16px;
+            margin-bottom: px;
+            color: aliceblue;
+            font-family: Impact, serif;
+        }
+        .grag_img {
+            
+            width: 300px; 
+            height: 300px;
+            margin-top: 16px;
+            filter: grayscale(100%); /* 设置图像过滤器为灰度 */
+            margin-left: auto; /* 左边外边距自动调整到最大值 */
+            margin-right: auto; /* 右边外边距自动调整到最大值 */
+        }
+    </style>
+    <div class="bg">
+        <div class="grag_img">
+            <img src="assets/images/portrait_official.jpg" alt="" >
+        </div>
+        <div class="div_name"><strong>SEA LYNN</strong></div>
+
+        <div class="div_year"><strong>1996 - <script>document.write(new Date().getFullYear())</script></strong></div>
+
+        <div class="div_word">ALIVE AND WELL</div>
+    </div>
+{% endblock %}
