@@ -1,9 +1,10 @@
 ---
 title: Hello World
 date: 2017-06-29 13:31:24
-# tags: 
-#     - Hello world
-# categories: Hello world
+tags: 
+    - Hello world
+categories: 
+    - Hello world
 ---
 
 <!-- ## 2018/2/14日 重新编辑 -->

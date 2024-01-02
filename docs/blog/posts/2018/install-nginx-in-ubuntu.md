@@ -1,10 +1,11 @@
 ---
 title: 记 在Ubuntu下安装Nginx
 date: 2018-02-13 11:43:41
-# tags: 
-#     - Nginx
-#     - Ubuntu
-# categories: 运维
+tags: 
+    - Nginx
+    - Ubuntu
+categories: 
+    - Ops
 ---
 
 前段时间我已经将 WordPress 从服务器上卸载，并且完全依靠 Hexo + GithubPage 来部署我的博客，所以我的服务器里是什么都没了。以前我在服务器里安装 Apache，但是后来了解到 Nginx有 ***轻量，抗并发*** 的特点，似乎更适合虚拟主机（毕竟我的服务器是腾讯云最便宜那款）。

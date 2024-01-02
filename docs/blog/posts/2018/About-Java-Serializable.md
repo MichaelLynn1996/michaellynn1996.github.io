@@ -1,8 +1,10 @@
 ---
 title: 【旧文重发】记使用Serializable接口踩过的坑
 date: 2018-01-21 22:50:51
-# tags: Java
-# categories: 开发
+tags: 
+    - Java
+categories: 
+    - Dev
 ---
 
 ## 写在开始之前

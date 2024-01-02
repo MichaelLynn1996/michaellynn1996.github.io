@@ -1,7 +1,10 @@
 ---
 title: solution of gsonformat
 date: 2021-02-02 14:25:36
-# tags: Android
+tags: 
+    - Android
+categories: 
+    - Dev
 ---
 
 最近更新了Android Studio版本到4.1之后。每次打开都会出现一下提示。

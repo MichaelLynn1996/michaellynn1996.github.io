@@ -1,8 +1,10 @@
 ---
 title: 星空直播平台安卓端开发的一些总结
 date: 2018-02-04 13:31:33
-# tags: Android
-# categories: 开发
+tags: 
+    - Android
+categories: 
+    - Dev
 ---
 
 项目地址：[https://github.com/xingkongus/stream-watch-android](https://github.com/xingkongus/stream-watch-android)
