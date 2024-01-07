@@ -138,7 +138,7 @@ hide:
 </div>
 <div></div> -->
 <div class="shell">
-        <img src="../assets/images/portrait.jpg" alt="" class="cover">
+        <img src="./assets/images/portrait.jpg" alt="" class="cover">
         <div class="head">
             <div class="data">
                 <div class="title1">Michael Lynn</div>
