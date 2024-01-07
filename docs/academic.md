@@ -2,6 +2,7 @@
 hide:
 - navigation
 - title
+- footer
 ---
 ## 研究兴趣
 

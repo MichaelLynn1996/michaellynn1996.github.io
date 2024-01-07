@@ -116,7 +116,7 @@ extra:
     deprecated: Deprecated
   analytics:
     provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
+    property: G-K6PG6J93W5
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/MichealLynn1996
@@ -128,13 +128,13 @@ extra:
     #   link: https://fosstodon.org/@squidfunk
     # - icon: fontawesome/brands/twitter
     #   link: https://twitter.com/squidfunk
-  alternate:
-    - name: 简体中文
-      link: /
-      lang: zh
-    - name: English
-      link: /en/ 
-      lang: en
+  # alternate:
+  #   - name: 简体中文
+  #     link: /
+  #     lang: zh
+  #   - name: English
+  #     link: /en/ 
+  #     lang: en
     
 
 # Extensions
