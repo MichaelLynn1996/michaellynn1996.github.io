@@ -1,31 +1,57 @@
 {#-
-  This file was automatically generated - do not edit
+This file was automatically generated - do not edit
 -#}
 {% extends "main.html" %}
 {% block tabs %}
-  {{ super() }}
-  <style>.md-header{position:initial}.md-main__inner{margin:0}.md-content{display:none}@media screen and (min-width:60em){.md-sidebar--secondary{display:none}}@media screen and (min-width:76.25em){.md-sidebar--primary{display:none}}
-  </style>
-  <section class="mdx-container">
-    <div class="md-grid md-typeset">
-      <div class="mdx-hero">
-        <div class="mdx-hero__image">
-          <img src="assets/images/20240102170446.png" alt="" width="1659" height="1200" draggable="false">
-        </div>
-        <div class="mdx-hero__content">
-          <h1>Hello there👋</h1>
-          <!-- <p class="tagline">{{ config.site_description }}. Hello, I'm Sea!</p> -->
-          <p>Michael here~</p>
-          <a href="{{ 'about/' | url }}" title="关于我" class="md-button md-button--primary">
-            About me
-          </a>
-          <a href="{{ 'academic/' | url }}" title="学术" class="md-button">
-            Academic
-          </a>
-        </div>
+{{ super() }}
+<style>
+  .md-header {
+    position: initial
+  }
+
+  .md-main__inner {
+    margin: 0
+  }
+
+  .md-content {
+    display: none
+  }
+
+  @media screen and (min-width:60em) {
+    .md-sidebar--secondary {
+      display: none
+    }
+  }
+
+  @media screen and (min-width:76.25em) {
+    .md-sidebar--primary {
+      display: none
+    }
+  }
+</style>
+<section class="mdx-container">
+  <div class="md-grid md-typeset">
+    <div class="mdx-hero">
+      <div class="mdx-hero__image">
+        <img src="assets/images/20240102170446.png" alt="" width="1659" height="1200" draggable="false">
+      </div>
+      <div class="mdx-hero__content">
+        <h1>Hello there👋</h1>
+        <!-- <p class="tagline">{{ config.site_description }}. Hello, I'm Sea!</p> -->
+        <p>Michael here~</p>
+        <a href="{{ 'about/' | url }}" title="关于我" class="md-button md-button--primary">
+          About me
+        </a>
+        <a href="{{ 'academic/' | url }}" title="学术" class="md-button">
+          Academic
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 {% endblock %}
 {% block content %}{% endblock %}
-{% block footer %}<p style=text-align:center;><a href='https://github.com/MichaelLynn1996/michaellynn1996.github.io'>&copy;  <script>document.write(new Date().getFullYear())</script> Michael Lynn</a></p>{% endblock %}
+{% block footer %}<p style=text-align:center;><a
+    href='https://github.com/MichaelLynn1996/michaellynn1996.github.io'>&copy;
+    <script>document.write(new Date().getFullYear())</script> Michael Lynn
+  </a></p>{% endblock %}
