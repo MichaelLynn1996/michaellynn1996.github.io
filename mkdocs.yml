@@ -207,8 +207,5 @@ nav:
     #   - blog/posts/2021/solution-of-gsonformat.md
   - 学术: academic.md
   - 关于: 
-    - about/about.md
+    - about.md
     - about/alive.md
-  # - For fun: 
-  #   - forfun/index.md
-  #   - forfun/alive.md
